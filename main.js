@@ -4,7 +4,7 @@
   //   - 利用するAPI : https://opentdb.com/api.php?amount=10&type=multiple
 
   const API_URL = 'https://opentdb.com/api.php?amount=10&type=multiple';
-  const quizList = document.getElementById('quiz-list');
+
   // API_URLを使って実装してもらいたいこと
   //   1. Fetch API(fetchメソッド)を使ってAPI経由でデータを取得する
   //     - https://developer.mozilla.org/ja/docs/Web/API/WindowOrWorkerGlobalScope/fetch
@@ -19,13 +19,14 @@
       return response.json();
     })
     .then(object => {
-      object.results.forEach((value, index) => {
-        const quizNum = document.createElement('li');
-        quizNum.textContent = index + 1 + '件目のクイズデータ';
-        quizList.appendChild(quizNum);
+      const quizList = document.getElementById('quiz-list');
+      object.results.forEach((quiz, index) => {
+        const quizLi = document.createElement('li');
+        quizLi.textContent = index + 1 + '件目のクイズデータ';
+        quizList.appendChild(quizLi);
 
-        const quizValue = buildQuizList(value);
-        quizNum.appendChild(quizValue);
+        const quizValue = buildQuizList(quiz);
+        quizLi.appendChild(quizValue);
       });
     });
 
@@ -44,7 +45,7 @@
   //    - ul要素のDOM
   function buildQuizList(quiz) {
     const quizContainer = document.createElement('ul');
-    for (key in quiz) {
+    for (const key in quiz) {
       const item = document.createElement('li');
       item.innerHTML = '<strong>' + key + '</strong>' + '：' + quiz[key];
       quizContainer.appendChild(item);
