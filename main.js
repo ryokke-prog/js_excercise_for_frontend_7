@@ -26,7 +26,7 @@
 
         const quizValue = buildQuizList(value);
         quizNum.appendChild(quizValue);
-      })
+      });
     });
 
   // `buildQuizList関数` を実装する
@@ -50,6 +50,6 @@
       quizContainer.appendChild(item);
     }
     return quizContainer;
-  };
+  }
 
 })();
